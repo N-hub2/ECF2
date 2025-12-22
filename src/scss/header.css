@@ -1,0 +1,34 @@
+/* ===== COLORS ===== */
+/* ===== TYPOGRAPHY ===== */
+/* ===== SPACING ===== */
+.header {
+  padding: 24px 0;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo img {
+  width: 180px;
+  height: 59px;
+  display: block;
+}
+.header__menu {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.header__link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.header__link:hover {
+  color: #6c63ff;
+}
+.header__cta {
+  margin-left: 32px;
+}/*# sourceMappingURL=header.css.map */

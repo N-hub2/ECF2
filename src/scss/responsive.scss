@@ -1,0 +1,12 @@
+@use "mixins" as *;
+
+@include responsive(tablet) {
+  .header__menu {
+    display: none;
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

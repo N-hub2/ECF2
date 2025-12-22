@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .header__menu {
+    display: none;
+  }
+  .hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}/*# sourceMappingURL=responsive.css.map */
