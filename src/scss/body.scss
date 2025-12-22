@@ -428,3 +428,231 @@
   background: $accent-color;
   color: #fff;
 }
+/* ================= TESTIMONIALS ================= */
+
+.testimonials {
+  padding: $section-padding 0;
+  text-align: center;
+  position: relative;
+
+  &__container {
+    position: relative;
+  }
+
+  &__line {
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: $accent-color;
+    margin: 0 auto 16px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &__content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+
+  &__text {
+    position: relative;
+    font-size: 1rem;
+    color: $text-muted;
+    line-height: 1.8;
+    padding: 0 60px;
+  }
+}
+
+/* quotes */
+.quote {
+  font-size: 2rem;
+  color: $accent-color;
+  position: absolute;
+
+  &--left {
+    left: 0;
+    top: -10px;
+  }
+
+  &--right {
+    right: 0;
+    bottom: -10px;
+  }
+}
+
+/* arrows */
+.testimonial-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  background: #fff;
+  border: 2px solid $accent-color;
+  color: $accent-color;
+
+  &--left {
+    left: -70px;
+  }
+
+  &--right {
+    right: -70px;
+    background: $accent-color;
+    color: #fff;
+    border: none;
+  }
+}
+
+/* people */
+.testimonials__people {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.person {
+  text-align: center;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .stars {
+    color: gold;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: $text-muted;
+  }
+
+  &--active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ================= CASE STUDIES ================= */
+
+.case-studies {
+  padding: $section-padding 0;
+  background: #fafafa;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__line {
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: $accent-color;
+    margin: 0 auto 16px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 400;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__more {
+    margin-top: 40px;
+    text-align: center;
+
+    a {
+      color: $accent-color;
+      font-weight: 500;
+      text-decoration: none;
+    }
+  }
+}
+
+/* ================= CASE CARD ================= */
+
+.case-study {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 40px;
+  padding: 30px;
+  border-radius: 20px;
+  align-items: center;
+
+  &--blue {
+    background: #eef2ff;
+  }
+
+  &--green {
+    background: #ecfdf5;
+  }
+
+  &--pink {
+    background: #fdf2f8;
+  }
+
+  &__media {
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &__heading {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: $text-color;
+  }
+
+  &__text {
+    font-size: 0.95rem;
+    color: $text-muted;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  &__link {
+    color: $accent-color;
+    font-weight: 500;
+    text-decoration: none;
+  }
+}
