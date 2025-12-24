@@ -1,0 +1,59 @@
+@use "variables" as *;
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: $font-main;
+  color: $text-color;
+  line-height: 1.6;
+  background-color: #fff;
+}
+
+.container {
+  width: 90%;
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: $primary-gradient;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 117, 247, 0.3);
+}
+
+.btn--secondary {
+  background: #3D63EA;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(61, 99, 234, 0.3);
+}
+
