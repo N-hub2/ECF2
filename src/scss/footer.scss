@@ -32,8 +32,11 @@
 }
 
 .footer__badges .footer__badge {
-  height: 36px;
+  height: 72px;
+  width: auto;
+  max-width: 180px;
   display: inline-block;
+  object-fit: contain;
 }
 
 .footer__nav .footer__heading,
@@ -72,13 +75,21 @@
 .footer__social {
   margin-top: 12px;
   display: flex;
-  gap: 10px;
+  gap: 4px;
+  align-items: center;
 }
 
 .social img {
-  width: 36px;
-  height: 36px;
+  width: 64px;
+  height: 64px;
   display: block;
+  object-fit: contain;
+}
+
+.social {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
 }
 
 .footer__bottom {

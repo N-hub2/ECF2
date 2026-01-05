@@ -819,6 +819,21 @@
   max-width: 480px;
 }
 
+/* vertical pill line matching .how__line but rotated (vertical) */
+.how__line--vertical {
+  display: block;
+  width: 4px;
+  height: 60px;
+  background: $second;
+  border-radius: 999px;
+}
+
+.way__quote-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .way__author {
   display: flex;
   align-items: center;
@@ -967,10 +982,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: none;
+  background: transparent !important;
 }
 
-.approach-card__icon img { width: 40px; height: 40px; object-fit: contain; }
+.approach-card__icon img { width: 40px; height: 40px; object-fit: contain; background: transparent; }
 
 .approach-card__title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
 .approach-card__text { font-size: .95rem; color: $text-muted; line-height: 1.6; }
@@ -981,7 +997,47 @@
 .approach-card--pink  .approach-card__icon { background: linear-gradient(135deg,#fb7185,#f472b6); }
 .approach-card--teal  .approach-card__icon { background: linear-gradient(135deg,#34d399,#10b981); }
 .approach-card--yellow .approach-card__icon { background: linear-gradient(135deg,#fbbf24,#f59e0b); }
+
 .approach-card--purple .approach-card__icon { background: linear-gradient(135deg,#a855f7,#9333ea); }
+
+/* Show icons without a colored background — keep the icon image only */
+.approach-card__icon {
+  background: transparent !important;
+}
+
+/* Make only the "UX first" phrase pick up the icon background color/gradient */
+.approach__em { font-weight: 600; }
+.approach-card--dark  .approach__em { color: #111827; }
+.approach-card--blue  .approach__em {
+  background: linear-gradient(135deg,#60a5fa,#3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.approach-card--pink  .approach__em {
+  background: linear-gradient(135deg,#fb7185,#f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.approach-card--teal  .approach__em {
+  background: linear-gradient(135deg,#34d399,#10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.approach-card--yellow .approach__em {
+  background: linear-gradient(135deg,#fbbf24,#f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.approach-card--purple .approach__em {
+  background: linear-gradient(135deg,#a855f7,#9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 @media (max-width: 900px) {
   .approach__grid { grid-template-columns: 1fr; }
@@ -1027,6 +1083,30 @@
   display: grid; grid-template-columns: repeat(5, minmax(120px,1fr)); gap: 40px 60px; align-items: center; justify-items: center; max-width: 100%; margin: 0 auto;
 }
 .tech__logos img { max-width: 160px; max-height: 70px; width: auto; height: auto; object-fit: contain; }
+
+/* Center the second row of logos when the grid has 5 columns.
+   For 9 items, the second row starts at nth-child(6) — shift it right one column
+   so the four logos occupy columns 2-5 and appear centered without changing gaps. */
+@media (min-width: 1001px) {
+  .tech__logos img:nth-child(6) { grid-column: 2; }
+  .tech__logos img:nth-child(7) { grid-column: 3; }
+  .tech__logos img:nth-child(8) { grid-column: 4; }
+  .tech__logos img:nth-child(9) { grid-column: 5; }
+}
+
+/* Center the wrapped secondary logos across columns 2-5 */
+.tech__secondary {
+  grid-column: 1 / span 4;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 40px 60px;
+  align-items: center;
+  justify-items: center;
+}
+
+@media (max-width: 1000px) {
+  .tech__secondary { grid-column: auto; grid-template-columns: repeat(2, 1fr); }
+}
 
 @media (max-width: 1000px) { .tech__logos { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 600px) { .tech__logos { grid-template-columns: repeat(2, 1fr); } }

@@ -367,7 +367,6 @@ body {
   position: relative;
   z-index: 1;
   /* ---------- HEADER ---------- */
-  /* ---------- LOGOS ---------- */
 }
 .partners__header {
   max-width: 1200px;
@@ -397,6 +396,9 @@ body {
 .partners h2 strong {
   display: block;
   font-weight: 700;
+}
+.partners {
+  /* ---------- LOGOS ---------- */
 }
 .partners__logos {
   max-width: 100%;
@@ -618,7 +620,6 @@ body {
 .case-studies {
   padding: 80px 0;
   background: #fafafa;
-  /* 🔑 container مشترک */
 }
 .case-studies__header {
   text-align: center;
@@ -637,6 +638,9 @@ body {
 }
 .case-studies__title strong {
   font-weight: 700;
+}
+.case-studies {
+  /* 🔑 container مشترک */
 }
 .case-studies__container {
   max-width: 1200px;
@@ -805,6 +809,21 @@ body {
   max-width: 480px;
 }
 
+/* vertical pill line matching .how__line but rotated (vertical) */
+.how__line--vertical {
+  display: block;
+  width: 4px;
+  height: 60px;
+  background: linear-gradient(3deg, #F76680, #57007B);
+  border-radius: 999px;
+}
+
+.way__quote-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .way__author {
   display: flex;
   align-items: center;
@@ -954,13 +973,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+  background: transparent !important;
 }
 
 .approach-card__icon img {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  background: transparent;
 }
 
 .approach-card__title {
@@ -998,6 +1019,55 @@ body {
 
 .approach-card--purple .approach-card__icon {
   background: linear-gradient(135deg, #a855f7, #9333ea);
+}
+
+/* Show icons without a colored background — keep the icon image only */
+.approach-card__icon {
+  background: transparent !important;
+}
+
+/* Make only the "UX first" phrase pick up the icon background color/gradient */
+.approach__em {
+  font-weight: 600;
+}
+
+.approach-card--dark .approach__em {
+  color: #111827;
+}
+
+.approach-card--blue .approach__em {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.approach-card--pink .approach__em {
+  background: linear-gradient(135deg, #fb7185, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.approach-card--teal .approach__em {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.approach-card--yellow .approach__em {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.approach-card--purple .approach__em {
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @media (max-width: 900px) {
@@ -1114,6 +1184,39 @@ body {
   object-fit: contain;
 }
 
+/* Center the second row of logos when the grid has 5 columns.
+   For 9 items, the second row starts at nth-child(6) — shift it right one column
+   so the four logos occupy columns 2-5 and appear centered without changing gaps. */
+@media (min-width: 1001px) {
+  .tech__logos img:nth-child(6) {
+    grid-column: 2;
+  }
+  .tech__logos img:nth-child(7) {
+    grid-column: 3;
+  }
+  .tech__logos img:nth-child(8) {
+    grid-column: 4;
+  }
+  .tech__logos img:nth-child(9) {
+    grid-column: 5;
+  }
+}
+/* Center the wrapped secondary logos across columns 2-5 */
+.tech__secondary {
+  grid-column: 1/span 4;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 40px 60px;
+  align-items: center;
+  justify-items: center;
+}
+
+@media (max-width: 1000px) {
+  .tech__secondary {
+    grid-column: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media (max-width: 1000px) {
   .tech__logos {
     grid-template-columns: repeat(3, 1fr);
@@ -1488,13 +1591,122 @@ body {
   }
 }
 .footer {
-  padding: 40px 0;
   background: #f0f0f0;
-  text-align: center;
-  font-size: 0.9rem;
   color: #4b5563;
+  font-size: 0.95rem;
 }
 
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  padding: 56px 0;
+  align-items: start;
+}
+
+.footer__brand {
+  max-width: 360px;
+}
+
+.footer__logo img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer__text {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.footer__badges .footer__badge {
+  height: 72px;
+  width: auto;
+  max-width: 180px;
+  display: inline-block;
+  object-fit: contain;
+}
+
+.footer__nav .footer__heading,
+.footer__contact .footer__heading {
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__links li {
+  margin: 8px 0;
+}
+
+.footer__links a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.footer__contact-text {
+  margin-bottom: 12px;
+}
+
+.footer__phone {
+  display: inline-block;
+  color: #6c63ff;
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.footer__social {
+  margin-top: 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.social img {
+  width: 64px;
+  height: 64px;
+  display: block;
+  object-fit: contain;
+}
+
+.social {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 16px 0;
+}
+
+.footer__copyright {
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .footer__top {
+    grid-template-columns: 1fr;
+  }
+  .footer__brand {
+    margin-bottom: 18px;
+  }
+  .footer__nav {
+    order: 3;
+  }
+  .footer__contact {
+    order: 2;
+  }
+}
 @media (max-width: 768px) {
   .header__menu {
     display: none;
@@ -1504,5 +1716,3 @@ body {
     text-align: center;
   }
 }
-
-/*# sourceMappingURL=main.css.map */
