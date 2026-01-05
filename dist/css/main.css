@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 	Main SCSS entry
 	- Loads design tokens, utilities, and section styles in order
@@ -577,22 +578,46 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
-  line-height: 1;
+  font-size: 0; /* hide raw text glyph; pseudo handles sizing */
+  line-height: 0; /* neutralize font line box */
   cursor: pointer;
+  position: relative; /* for pseudo centering */
+  color: transparent; /* hide raw glyph; use pseudo for perfect centering */
   background: transparent;
   border: 2px solid #57007B;
-  color: #57007B;
   padding: 0;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease;
 }
 .arrow:hover {
   background: #57007B;
-  color: #fff;
 }
 .arrow:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px transparent, 0 0 0 2px rgba(108, 99, 255, 0.35);
+}
+
+/* Use a pseudo-element to perfectly center the arrow glyph inside the circle */
+.arrow::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 1px));
+  font-size: 30px;
+  line-height: 1;
+  color: #57007B;
+}
+
+.arrow--left::before {
+  content: "←";
+}
+
+.arrow--right::before {
+  content: "→";
+  color: #fff;
+}
+
+.arrow:hover::before {
+  color: #fff;
 }
 
 /* LEFT arrow - outlined (previous) */
@@ -711,23 +736,45 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 0; /* hide raw glyph; use pseudo for perfect centering */
+  line-height: 0;
+  position: absolute;
   background: #fff;
   border: 2px solid #57007B;
-  color: #57007B;
+  color: transparent;
 }
 .testimonial-arrow--left {
-  left: -70px;
+  left: -360px;
 }
 .testimonial-arrow--right {
-  right: -70px;
+  right: -360px;
   background: #57007B;
-  color: #fff;
   border: none;
 }
 .testimonial-arrow:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px transparent, 0 0 0 2px rgba(108, 99, 255, 0.35);
+}
+
+/* Perfectly center testimonial arrow glyphs inside the circle */
+.testimonial-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 1px));
+  font-size: 30px;
+  line-height: 1;
+}
+
+.testimonial-arrow--left::before {
+  content: "←";
+  color: #57007B;
+}
+
+.testimonial-arrow--right::before {
+  content: "→";
+  color: #fff;
 }
 
 /* people */

@@ -393,24 +393,38 @@
   border-radius: 50%;
   @include flex-center;
 
-  font-size: 30px;
-  line-height: 1;
+  font-size: 0; /* hide raw text glyph; pseudo handles sizing */
+  line-height: 0; /* neutralize font line box */
   cursor: pointer;
+  position: relative; /* for pseudo centering */
+  color: transparent; /* hide raw glyph; use pseudo for perfect centering */
 
   background: transparent;
   border: 2px solid $brand-purple;
-  color: $brand-purple;
 
   padding: 0;
 
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease;
 
   &:hover {
     background: $brand-purple;
-    color: #fff;
   }
   &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
+
+/* Use a pseudo-element to perfectly center the arrow glyph inside the circle */
+.arrow::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 1px));
+  font-size: 30px;
+  line-height: 1;
+  color: $brand-purple;
+}
+.arrow--left::before { content: '←'; }
+.arrow--right::before { content: '→'; color: #fff; }
+.arrow:hover::before { color: #fff; }
 
 /* LEFT arrow - outlined (previous) */
 .arrow--left {
@@ -540,23 +554,37 @@
   cursor: pointer;
   @include flex-center;
 
-  font-size: 30px;
+  font-size: 0; /* hide raw glyph; use pseudo for perfect centering */
+  line-height: 0;
+  position: absolute;
   background: #fff;
   border: 2px solid $brand-purple;
-  color: $brand-purple;
+  color: transparent;
 
   &--left {
-    left: -70px;
+    left: -360px;
   }
 
   &--right {
-    right: -70px;
+    right: -360px;
     background: $brand-purple;
-    color: #fff;
     border: none;
   }
   &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
+
+/* Perfectly center testimonial arrow glyphs inside the circle */
+.testimonial-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 1px));
+  font-size: 30px;
+  line-height: 1;
+}
+.testimonial-arrow--left::before { content: '←'; color: $brand-purple; }
+.testimonial-arrow--right::before { content: '→'; color: #fff; }
 
 /* people */
 .testimonials__people {
