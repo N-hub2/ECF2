@@ -1,12 +1,245 @@
+@use "variables" as *;
 @use "mixins" as *;
 
-@include responsive(tablet) {
+/*
+  Responsive Stylesheet
+  =====================
+  Scope:
+  - Tablet and Mobile only
+  - Desktop layout remains untouched
+  - Fixes spacing, stacking, alignment, and visual rhythm
+  - English comments only (review-friendly)
+*/
+
+/* =================================================
+   TABLET (max-width: $bp-md)
+   ================================================= */
+@include respond-max($bp-md) {
+
+  /* ---------- Header ---------- */
   .header__menu {
     display: none;
+  }
+
+  .header__nav {
+    gap: 20px;
+  }
+
+  .header__cta {
+    margin-left: 20px;
+  }
+
+  /* ---------- Global Section Spacing ---------- */
+  section {
+    padding: 72px 0;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 72px 0;
   }
 
   .hero__container {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 48px;
+  }
+
+  .hero__title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+  }
+
+  .hero__image {
+    margin: 0 auto;
+    max-width: 420px;
+  }
+
+  /* ---------- Services ---------- */
+  .services__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .service {
+    width: 100%;
+  }
+
+  /* ---------- Trust ---------- */
+  .trust__container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .trust__content {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Partners ---------- */
+  .partners__header {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .partners__logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 32px 0;
+    height: auto;
+  }
+
+  .partners__logos img {
+    max-width: 120px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Testimonials ---------- */
+  .testimonial-arrow,
+  .deco-img {
+    display: none;
+  }
+
+  .testimonials__content {
+    margin: 0 auto 48px;
+    text-align: center;
+    max-width: 680px;
+  }
+
+  /* ---------- Case Studies ---------- */
+  .case-study {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* ---------- Way of Building ---------- */
+  .way__section {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .way__section--reverse {
+    direction: ltr;
+  }
+
+  /* ---------- Tech Stack ---------- */
+  .tech__tabs {
+    gap: 24px;
+    justify-content: center;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta__content {
+    gap: 40px;
+    text-align: center;
   }
 }
+
+/* =================================================
+   MOBILE (max-width: $bp-sm)
+   ================================================= */
+@include respond-max($bp-sm) {
+
+  /* ---------- Global Section Spacing ---------- */
+  section {
+    padding: 56px 0;
+  }
+
+  /* ---------- Header ---------- */
+  .header__logo img {
+    width: 140px;
+    height: auto;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 48px 0;
+  }
+
+  .hero__container {
+    gap: 32px;
+  }
+
+  .hero__title {
+    font-size: 1.8rem;
+    line-height: 1.25;
+  }
+
+  .hero__image {
+    max-width: 280px;
+  }
+
+  /* ---------- Services ---------- */
+  .services__list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .service {
+    width: 100%;
+  }
+
+  /* ---------- Trust ---------- */
+  .trust__container {
+    gap: 32px;
+  }
+
+  .trust__content {
+    max-width: 100%;
+  }
+
+  /* ---------- Partners ---------- */
+  .partners__logos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .partners__logos img {
+    max-width: 110px;
+  }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials__text {
+    padding: 0 20px;
+  }
+
+  .testimonials__people {
+    gap: 20px;
+  }
+
+  /* ---------- Case Studies ---------- */
+  .case-study {
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .case-study__text {
+    max-width: 100%;
+  }
+
+  /* ---------- Way of Building ---------- */
+  .way__header h2 {
+    font-size: 1.9rem;
+  }
+
+  .way__content h3 {
+    font-size: 1.4rem;
+  }
+
+  /* ---------- Tech Stack ---------- */
+  .tech__tabs {
+    gap: 16px;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta__title {
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+}
+

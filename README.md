@@ -7,6 +7,7 @@ A static, SCSS-powered marketing site. It uses semantic HTML and a modular SCSS 
 - Stack: HTML5 + SCSS (compiled to CSS). No JavaScript.
 - Build: `sass` compiles `src/scss/main.scss` → `dist/css/main.css`.
 - Assets: Images live under `dist/images/...` and are referenced from HTML and CSS.
+ - Responsiveness: Tablet and mobile layouts are handled in `src/scss/responsive.scss` using shared breakpoint tokens.
 
 ## How It Works (No JavaScript)
 There is no JavaScript bundle or runtime. The site relies on:
@@ -83,7 +84,19 @@ Accessibility considerations:
 	- Normalize/base styles: box-sizing, default typography rules, links, lists, and basic element resets.
 
 - `responsive.scss`
-	- Centralized media queries and breakpoint utilities used across sections.
+	- Centralized tablet/mobile rules. Uses `$bp-md` (768px) and `$bp-sm` (600px) with `respond-max` mixin.
+	- Tablet (≤768px):
+		- Header spacing tightened; CTA kept. Desktop menu already hidden.
+		- Hero stacks to one column; image centered.
+		- Trust becomes single-column; content remains readable.
+		- Partners header stacks; logos wrap and center with smaller max-widths.
+		- Testimonials hide decorative images/arrows; core content remains.
+		- Case studies stack to single column; Way sections stack; Tech tabs spacing reduced; CTA gap adjusted.
+	- Mobile (≤600px):
+		- Slightly smaller header logo; hero title to 2rem.
+		- Service card width reduced (maintains horizontal scroll-snap).
+		- Tighter testimonial text padding and avatar gaps; partners logos smaller.
+		- Case study padding/gap reduced; Way/CTA headings slightly smaller.
 
 - `header.scss`
 	- Styles for the site header (branding, nav alignment, spacing, responsive tweaks).
@@ -100,6 +113,11 @@ Accessibility considerations:
 		- `.cta` button and layout.
 		- `.text-highlight`, `.way__quote`, `.way__quote-row`.
 
+### Breakpoints & Mixins
+- Breakpoint tokens live in [src/scss/variables.scss](src/scss/variables.scss): `$bp-sm: 600px`, `$bp-md: 768px`, `$bp-lg: 1000px`, `$bp-xl: 1200px`.
+- Media helpers are in [src/scss/mixins.scss](src/scss/mixins.scss): `respond-max($bp)` and `respond-min($bp)`.
+- A legacy `responsive(tablet)` mixin (max-width: 768px) remains for compatibility; do not remove unless refactoring all call sites.
+
 ## Build and Run
 
 You can compile SCSS using the Sass CLI. Example (PowerShell on Windows):
@@ -111,6 +129,7 @@ Pop-Location
 ```
 
 Optional: if you use a live compiler (e.g., VS Code extension), ensure it points to `src/scss/main.scss` and outputs to `dist/css/main.css`.
+Tip: If a live compiler emits stray CSS files inside `src/scss/` (e.g., `*.css`, `*.css.map`), delete them to keep sources clean. The only compiled CSS should be `dist/css/main.css`.
 
 ## Version Control (Git)
 - Repository: standard Git project; work should be done on feature branches and merged via pull requests.
@@ -129,12 +148,32 @@ Suggested workflow:
 - Layout: CSS Grid for section layouts; Flexbox for alignment.
 - No JS: there is intentionally no `*.js` file; interactions are purely CSS/HTML.
 - Images: stored in `dist/images/...` and referenced directly; prefer transparent PNG/SVG where appropriate.
+ - Comments: English-only, ASCII punctuation (avoid smart dashes); section banners use `/* ===== SECTION ===== */` in SCSS and `<!-- ===== SECTION ===== -->` in HTML.
+ - Accessibility: Focus-visible rings added via `focus-ring` mixin; decorative elements use `aria-hidden="true"` when appropriate.
 
 ## Recent UI Details
 - Added vertical accent next to specific quotes using `.how__line--vertical` inside `.way__quote-row`.
 - Adjusted Tech logos grid:
 	- When 9 logos are present in a 5-column layout, the second row can be centered via grid placement or wrapped in `.tech__secondary` to control alignment (center or left) without altering gaps.
 - Footer enhancements: accessible structure, larger social icons, tuned spacing, and PageSpeed badge sizing.
+- Responsive pass: added tablet/mobile rules in `responsive.scss` preserving visual intent; hid purely decorative elements on small screens; stacked complex grids (case studies, way, hero) for readability.
+- Comment standardization: cleaned and unified English comments in SCSS and `index.html` without altering DOM or output.
+
+## Utility Script: update_process.py
+- File: [ECF2/update_process.py](ECF2/update_process.py)
+- Purpose: Reads [ECF2/index.html](ECF2/index.html) and replaces any `<section class="process">…</section>` block with a hardcoded HTML template.
+- How it works:
+	- Opens `index.html` with UTF-8.
+	- Uses `re.sub(r'<section class="process">.*?</section>', new_html, flags=re.DOTALL)` to replace matches.
+	- Overwrites `index.html` and prints a success message.
+- Important for this project:
+	- The current site uses the "Way of building" section (`<section class="way">…</section>`), not `process`. As-is, the script will do nothing, or if adapted, it could break styling because its injected markup uses different class names (`process`, `image-wrapper`, etc.) and external images (Unsplash/Pravatar) instead of local assets under `dist/images/...`.
+- Risks/limitations:
+	- Regex on HTML is brittle; all matches are replaced, and no backup is created.
+	- Class names and structure do not align with our SCSS architecture and tokens.
+- Recommendations:
+	- Prefer not to run this script in the current setup.
+	- If automation is required, refactor to use an HTML parser (e.g., BeautifulSoup), create a backup before writing, and inject markup that matches the existing `way` section classes and local image paths.
 
 ## Limitations and Future Work
 - JavaScript not included due to timeline; may add later for interactive features (tabs, mobile menu, animations).

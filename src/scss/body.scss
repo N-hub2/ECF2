@@ -1,6 +1,12 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+/*
+  Body stylesheet
+  - Section-level styles (hero, services, trust, partners, testimonials, case studies, way, approach, tech, how, resources, cta)
+  - Uses design tokens from variables and utility mixins
+  - No JavaScript; purely presentational styling
+*/
 /* ================= HERO ================= */
 
 .hero {
@@ -20,18 +26,12 @@
 
     span {
       &.product {
-        background: linear-gradient(180deg, #cd6ea1 80%, #cccccc 30%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        @include text-gradient(linear-gradient(180deg, $pink-300 80%, $gray-200 30%));
         font-weight: bold;
       }
 
       &.teams {
-        background: linear-gradient(315deg, #F7666F, #406AFF);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        @include text-gradient(linear-gradient(315deg, $brand-coral-600, $blue-500));
       }
     }
 
@@ -69,7 +69,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #F76680, #57007B);
+    background: linear-gradient(135deg, $brand-coral, $brand-purple);
     z-index: -1;
 
     &--top {
@@ -89,7 +89,7 @@
 
 .services {
   padding: 11px 0;
-  background: #f7f7fb;
+  background: $bg-surface;
   position: relative;
   z-index: 1;
 
@@ -110,13 +110,7 @@
     padding: 20px 10px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @include hide-scrollbar;
   }
 }
 
@@ -137,13 +131,10 @@
   &--center {
     transform: translateY(20px);
     border: 2px solid transparent;
-    border-image: linear-gradient(135deg, #F76680, #57007B) 1;
+    border-image: linear-gradient(135deg, $brand-coral, $brand-purple) 1;
 
     .service__title {
-      background: linear-gradient(90deg, #F76680, #57007B);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      @include text-gradient(linear-gradient(90deg, $brand-coral, $brand-purple));
     }
   }
 
@@ -178,12 +169,13 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #d0d0d0;
+  background: $gray-400;
   cursor: pointer;
 
   &.active {
     background: $second;
   }
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
 /* ================= PROGRESS ================= */
@@ -200,7 +192,7 @@
   &-bar {
     width: 100px;
     height: 2px;
-    background: #ddd;
+    background: $gray-300;
     position: relative;
   }
 
@@ -210,7 +202,7 @@
     top: 0;
     height: 100%;
     width: 20%;
-    background: linear-gradient(90deg, #F76680, #57007B);
+    background: linear-gradient(90deg, $brand-coral, $brand-purple);
     transition: width 0.3s ease;
   }
 }
@@ -261,6 +253,7 @@
     color: $accent-color;
     text-decoration: none;
     font-weight: 500;
+    &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
   }
 
   &__media {
@@ -285,16 +278,14 @@
     color: #fff;
     font-size: 20px;
     cursor: pointer;
+    &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
   }
 }
 .text-highlight {
-      background: $second; 
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: 500; 
-      display: inline-block; 
-    }
+  @include text-gradient($second);
+  font-weight: 500;
+  display: inline-block;
+}
   
 /* ================= PARTNERS ================= */
 
@@ -388,7 +379,7 @@
     }
   }
 }
-/* ================= ARROWS (FINAL – MATCH FIGMA) ================= */
+/* ================= ARROWS (FINAL - MATCH FIGMA) ================= */
 
 .partners__arrows {
   display: flex;
@@ -400,37 +391,35 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 
   font-size: 30px;
   line-height: 1;
   cursor: pointer;
 
   background: transparent;
-  border: 2px solid #57007B;
-  color: #57007B;
+  border: 2px solid $brand-purple;
+  color: $brand-purple;
 
   padding: 0;
 
   transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background: #57007B;
+    background: $brand-purple;
     color: #fff;
   }
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
-/* LEFT arrow – outlined (مثل fleche prev) */
+/* LEFT arrow - outlined (previous) */
 .arrow--left {
   background: transparent;
 }
 
-/* RIGHT arrow – filled (مثل fleche next active) */
+/* RIGHT arrow - filled (next active) */
 .arrow--right {
-  background: #57007B;
+  background: $brand-purple;
   color: #fff;
 }
 
@@ -486,7 +475,7 @@
   background-size: contain;
 }
 
-/* curve چپ */
+/* left decorative curve */
 .deco-img--testimonials-left {
   width: 300px;
   height: 400px;
@@ -504,7 +493,7 @@
   bottom: -270px;
 }
 
-/* curve راست */
+/* right decorative curve */
 .deco-img--testimonials-right {
   width: 350px;
   height: 550px;
@@ -515,7 +504,7 @@
 }
 
 
-/* quotes */
+/* testimonial quote icons */
 .quote {
   position: absolute;
   width: 40px;
@@ -540,7 +529,7 @@
 }
 
 
-/* arrows */
+/* testimonial arrows */
 .testimonial-arrow {
   width: 44px;
   height: 44px;
@@ -549,15 +538,12 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 
   font-size: 30px;
   background: #fff;
-  border: 2px solid #57007B;
-  color: #57007B;
+  border: 2px solid $brand-purple;
+  color: $brand-purple;
 
   &--left {
     left: -70px;
@@ -565,10 +551,11 @@
 
   &--right {
     right: -70px;
-    background: #57007B;
+    background: $brand-purple;
     color: #fff;
     border: none;
   }
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
 /* people */
@@ -615,7 +602,7 @@
 /* ================= CASE STUDIES ================= */
 .case-studies {
   padding: $section-padding 0;
-  background: #fafafa;
+  background: $bg-alt;
 
   &__header {
     text-align: center;
@@ -639,7 +626,7 @@
     }
   }
 
-  /* 🔑 container مشترک */
+  /* Shared container */
   &__container {
     max-width: $container-width;
     margin: 0 auto;
@@ -659,10 +646,7 @@
   }
 
   &__more {
-    background: $second;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    @include text-gradient($second);
 
     font-weight: 800;
     text-decoration: none;
@@ -671,6 +655,7 @@
     &:hover {
       opacity: 0.8;
     }
+    &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
   }
 }
 
@@ -712,17 +697,14 @@
   &__link {
     font-weight: 500;
     text-decoration: none;
-
-    background: $second;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    @include text-gradient($second);
 
     transition: opacity 0.3s ease;
 
     &:hover {
       opacity: 0.8;
     }
+    &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
   }
 }
 
@@ -806,6 +788,7 @@
   color: $second;
   font-weight: 500;
   text-decoration: none;
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
 .way__quote {
@@ -930,7 +913,7 @@
 /* ================= APPROACH ================= */
 .approach {
   padding: $section-padding 0;
-  background: #fafafa;
+  background: $bg-alt;
 }
 
 .approach__container {
@@ -972,16 +955,14 @@
   gap: 18px;
   padding: 24px;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid $border-neutral;
   box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
 .approach-card__icon {
   width: 56px;
   height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   box-shadow: none;
   background: transparent !important;
 }
@@ -991,53 +972,19 @@
 .approach-card__title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
 .approach-card__text { font-size: .95rem; color: $text-muted; line-height: 1.6; }
 
-/* Icon color variants */
-.approach-card--dark  .approach-card__icon { background: #111827; }
-.approach-card--blue  .approach-card__icon { background: linear-gradient(135deg,#60a5fa,#3b82f6); }
-.approach-card--pink  .approach-card__icon { background: linear-gradient(135deg,#fb7185,#f472b6); }
-.approach-card--teal  .approach-card__icon { background: linear-gradient(135deg,#34d399,#10b981); }
-.approach-card--yellow .approach-card__icon { background: linear-gradient(135deg,#fbbf24,#f59e0b); }
-
-.approach-card--purple .approach-card__icon { background: linear-gradient(135deg,#a855f7,#9333ea); }
-
-/* Show icons without a colored background — keep the icon image only */
+/* Show icons without a colored background - keep the icon image only */
 .approach-card__icon {
   background: transparent !important;
 }
 
 /* Make only the "UX first" phrase pick up the icon background color/gradient */
 .approach__em { font-weight: 600; }
-.approach-card--dark  .approach__em { color: #111827; }
-.approach-card--blue  .approach__em {
-  background: linear-gradient(135deg,#60a5fa,#3b82f6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.approach-card--pink  .approach__em {
-  background: linear-gradient(135deg,#fb7185,#f472b6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.approach-card--teal  .approach__em {
-  background: linear-gradient(135deg,#34d399,#10b981);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.approach-card--yellow .approach__em {
-  background: linear-gradient(135deg,#fbbf24,#f59e0b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.approach-card--purple .approach__em {
-  background: linear-gradient(135deg,#a855f7,#9333ea);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+.approach-card--dark  .approach__em { color: $gray-900; }
+.approach-card--blue  .approach__em { @include text-gradient(linear-gradient(135deg,#60a5fa,#3b82f6)); }
+.approach-card--pink  .approach__em { @include text-gradient(linear-gradient(135deg,#fb7185,#f472b6)); }
+.approach-card--teal  .approach__em { @include text-gradient(linear-gradient(135deg,#34d399,#10b981)); }
+.approach-card--yellow .approach__em { @include text-gradient(linear-gradient(135deg,#fbbf24,#f59e0b)); }
+.approach-card--purple .approach__em { @include text-gradient(linear-gradient(135deg,#a855f7,#9333ea)); }
 
 @media (max-width: 900px) {
   .approach__grid { grid-template-columns: 1fr; }
@@ -1075,8 +1022,8 @@
 .tech__tabs {
   display: flex; gap: 36px; justify-content: center; align-items: center; margin: 22px 0 36px; list-style: none; padding: 0;
 }
-.tech__tabs li { position: relative; color: #6b7280; font-weight: 500; cursor: default; }
-.tech__tabs li.active { background: $second; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tech__tabs li { position: relative; color: $text-muted-alt; font-weight: 500; cursor: default; }
+.tech__tabs li.active { @include text-gradient($second); }
 .tech__tabs li.active::after { content:''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -10px; width: 36px; height: 3px; border-radius: 999px; background: $second; }
 
 .tech__logos {
@@ -1085,8 +1032,8 @@
 .tech__logos img { max-width: 160px; max-height: 70px; width: auto; height: auto; object-fit: contain; }
 
 /* Center the second row of logos when the grid has 5 columns.
-   For 9 items, the second row starts at nth-child(6) — shift it right one column
-   so the four logos occupy columns 2-5 and appear centered without changing gaps. */
+  For 9 items, the second row starts at nth-child(6) - shift it right one column
+  so the four logos occupy columns 2-5 and appear centered without changing gaps. */
 @media (min-width: 1001px) {
   .tech__logos img:nth-child(6) { grid-column: 2; }
   .tech__logos img:nth-child(7) { grid-column: 3; }
@@ -1132,7 +1079,7 @@
 .how-card {
   position: relative;
   background: #fff;
-  border: 1px solid #efe7f4;
+  border: 1px solid $border-subtle;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.04);
   padding: 20px 22px;
@@ -1155,7 +1102,7 @@
 .how-card--top::after { bottom: -30px; height: 30px; }
 .how-card--bottom::after { top: -53px; height: 53px; }
 
-.how-card__index { background: $second; -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; margin-bottom: 8px; }
+.how-card__index { @include text-gradient($second); font-weight: 800; margin-bottom: 8px; }
 .how-card__title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: $text-color; }
 .how-card__text { font-size: .95rem; color: $text-muted; line-height: 1.6; }
 
@@ -1185,12 +1132,7 @@
   padding: 20px 10px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  @include hide-scrollbar;
 }
 
 .resource-card {
@@ -1213,7 +1155,7 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
-  background: #f0f0f0;
+  background: $bg-light;
   position: relative;
 }
 
@@ -1243,13 +1185,11 @@
   text-align: right;
   padding: 0 16px 16px;
   margin-top: 6px;
-  background: $primary-gradient;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  @include text-gradient($primary-gradient);
   font-weight: 500;
   font-size: 0.95rem;
   text-decoration: none;
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
 
@@ -1261,10 +1201,10 @@
   .resource-card { width: 280px; }
 }
 
-// CTA Section
+/* ================= CTA ================= */
 .cta {
   padding: 80px 20px;
-  background: #f5f5f5;
+  background: $bg-neutral-100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1276,7 +1216,7 @@
 }
 
 .cta__card {
-  background: #e8eef7;
+  background: $bg-neutral-200;
   border-radius: 24px;
   padding: 48px 60px;
   max-width: 1000px;
@@ -1301,9 +1241,7 @@
 }
 
 .cta__button-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 }
 
 .cta__button-wrap {
@@ -1327,13 +1265,11 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(255, 107, 91, 0.3);
   }
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
 }
 
 .cta__burst {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  @include absolute-center;
   width: 90px;
   height: auto;
   pointer-events: none;

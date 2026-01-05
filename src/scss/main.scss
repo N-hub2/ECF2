@@ -1,9 +1,22 @@
+/*
+	Main SCSS entry
+	- Loads design tokens, utilities, and section styles in order
+	- Comment-only; no style overrides here
+*/
+
+/* ===== CORE (tokens & utilities) ===== */
 @use "variables";
 @use "mixins";
+
+/* ===== BASE & GLOBALS ===== */
 @use "base";
+
+/* ===== LAYOUT SECTIONS ===== */
 @use "header";
 @use "body";
 @use "footer";
+
+/* ===== RESPONSIVE ===== */
 @use "responsive";
 
 
