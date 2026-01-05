@@ -1,0 +1,60 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/*
+  Header stylesheet
+  - Site header layout and navigation styles
+  - Uses design tokens and mixins (focus ring) for consistency and accessibility
+  - Comment-only documentation; no style changes here
+*/
+
+/* ===== HEADER ROOT ===== */
+.header {
+  padding: 24px 0;
+
+  /* Navigation bar: logo, menu, and CTA */
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Brand logo */
+  &__logo img {
+    width: 180px;
+    height: 59px;
+    display: block;
+  }
+
+  /* Top-level menu list */
+  &__menu {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Navigation links */
+  &__link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $text-muted;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    &:focus-visible {
+      @include focus-ring(rgba($primary-color, 0.4), 2px, 2px);
+      border-radius: 4px;
+    }
+  }
+
+  /* Call-to-action wrapper (button or link) */
+  &__cta {
+    margin-left: 32px;
+  }
+}

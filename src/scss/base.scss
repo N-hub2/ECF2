@@ -1,0 +1,72 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/*
+  Base stylesheet
+  - Global reset and foundational styles shared across the site
+  - Uses design tokens from variables and utilities from mixins
+  - No component-specific styling belongs here
+*/
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: $font-main;
+  color: $text-color;
+  line-height: 1.6;
+  background-color: #fff;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  width: 90%;
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+/* ===== BUTTONS ===== */
+/* Core button base: layout, typography and accessibility */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  /* Keyboard focus outline (visible only when tabbing) */
+  &:focus-visible { @include focus-ring(rgba($primary-color, 0.35), 2px, 2px); }
+}
+
+/* Primary button variant - gradient brand style */
+.btn--primary {
+  background: $primary-gradient;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 117, 247, 0.3);
+}
+
+/* Secondary button variant - solid brand color */
+.btn--secondary {
+  background: $secondary-color;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba($secondary-color, 0.3);
+}
+
