@@ -1,9 +1,100 @@
 @use "variables" as *;
 
 .footer {
-  padding: 40px 0;
   background: $bg-light;
-  text-align: center;
-  font-size: 0.9rem;
   color: $text-muted;
+  font-size: 0.95rem;
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  padding: 56px 0;
+  align-items: start;
+}
+
+.footer__brand {
+  max-width: 360px;
+}
+
+.footer__logo img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer__text {
+  color: $text-muted;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.footer__badges .footer__badge {
+  height: 36px;
+  display: inline-block;
+}
+
+.footer__nav .footer__heading,
+.footer__contact .footer__heading {
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: $text-color;
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__links li {
+  margin: 8px 0;
+}
+
+.footer__links a {
+  color: $text-muted;
+  text-decoration: none;
+}
+
+.footer__contact-text {
+  margin-bottom: 12px;
+}
+
+.footer__phone {
+  display: inline-block;
+  color: $primary-color;
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.footer__social {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.social img {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 16px 0;
+}
+
+.footer__copyright {
+  text-align: center;
+  color: $text-muted;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__brand { margin-bottom: 18px; }
+  .footer__nav { order: 3; }
+  .footer__contact { order: 2; }
 }
